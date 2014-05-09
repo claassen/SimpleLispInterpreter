@@ -13,6 +13,11 @@ namespace SimpleLisptInterpreter
     public class SubExpression : Token
     {
         public List<Token> Tokens;
+
+        public SubExpression(List<Token> tokens)
+        {
+            Tokens = tokens;
+        }
     }
 
     public class Number : Token
@@ -47,6 +52,11 @@ namespace SimpleLisptInterpreter
 
         public OperatorType Type;
 
+        public MathOperator(OperatorType type)
+        {
+            Type = type;
+        }
+
         public NumberValue Evaluate(NumberValue x, NumberValue y)
         {
             switch (Type)
@@ -71,10 +81,17 @@ namespace SimpleLisptInterpreter
         {
             Eq,
             Gt,
-            Lt
+            Lt,
+            Ge,
+            Le
         }
 
         public OperatorType Type;
+
+        public LogicalOperator(OperatorType type)
+        {
+            Type = type;
+        }
 
         public BooleanValue Evaluate(NumberValue x, NumberValue y)
         {
@@ -101,6 +118,11 @@ namespace SimpleLisptInterpreter
         }
 
         public OperatorType Type;
+
+        public BooleanOperator(OperatorType type)
+        {
+            Type = type;
+        }
 
         public BooleanValue Evaluate(BooleanValue x, BooleanValue y)
         {

@@ -11,7 +11,7 @@ namespace SimpleLisptInterpreter
     {
         static void Main(string[] args)
         {
-            string code = "";
+            string code;
 
             if (args.Length > 0)
             {
@@ -23,7 +23,7 @@ namespace SimpleLisptInterpreter
             {
                 do
                 {
-                    Console.WriteLine("Real time SimpleList evaluator. Type in a line of SimpleLispCode to compile it");
+                    Console.WriteLine("Real time SimpleLisp evaluator. \nType in a line of SimpleLispCode to compile it");
                     code = Console.ReadLine();
 
                     RunProgram(code);
@@ -36,7 +36,11 @@ namespace SimpleLisptInterpreter
         {
             try
             {
-                Console.WriteLine(Interpreter.Evaluate(Parser.Parse(code)));
+                RecursiveDescentParser parser = new RecursiveDescentParser(code);
+
+                List<Token> tokens = parser.Parse();
+
+                Console.WriteLine(Interpreter.Evaluate(tokens));
             }
             catch (Exception ex)
             {

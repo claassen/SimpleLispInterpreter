@@ -8,6 +8,8 @@ namespace SimpleLisptInterpreter
 {
     public static class Parser
     {
+        
+
         public static List<Token> Parse(string source)
         {
             List<Token> tokens = new List<Token>();
@@ -20,19 +22,19 @@ namespace SimpleLisptInterpreter
 
                 if (token.StartsWith("("))
                 {
-                    tokens.Add(new SubExpression() { Tokens = Parse(token.Substring(1, token.Length - 2)) });
+                    tokens.Add(new SubExpression(Parse(token.Substring(1, token.Length - 2))));
                 }
                 else if (IsMathOperator(token))
                 {
-                    tokens.Add(new MathOperator() { Type = GetMathOperatorType(token) });
+                    tokens.Add(new MathOperator(GetMathOperatorType(token)));
                 }
                 else if (IsLogicalOperator(token))
                 {
-                    tokens.Add(new LogicalOperator() { Type = GetLogicalOperatorType(token) });
+                    tokens.Add(new LogicalOperator(GetLogicalOperatorType(token)));
                 }
                 else if (IsBooleanOperator(token))
                 {
-                    tokens.Add(new BooleanOperator() { Type = GetBooleanOperatorType(token) });
+                    tokens.Add(new BooleanOperator(GetBooleanOperatorType(token)));
                 }
                 else if (IsLambdaExpression(token))
                 {
